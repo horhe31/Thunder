@@ -20,4 +20,16 @@ document.addEventListener('DOMContentLoaded', function() {
             loadMoreButton.innerText = 'No More Testimonials';
         }
     });
+
+    // Smooth scroll for navigation
+    const navLinks = document.querySelectorAll('nav a');
+    navlinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 });
+</script>
