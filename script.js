@@ -21,15 +21,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Smooth scroll for navigation
-    const navLinks = document.querySelectorAll('nav a');
-    navlinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+    document.getElementById('testimonial-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('testimonial-name').value;
+        const message = document.getElementById('testimonial-message').value;
+        const newTestimonial = document.createElement('div');
+        newTestimonial.className = 'testimonial';
+        newTestimonial.innerHTML = `<p>"${message}" - ${name}</p>`;
+        document.getElementById('testimonials').appendChild(newTestimonial);
+        this.reset();
+    });
+
+    const nav = document.getElementById('navbar');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY) {
+            nav.classList.add('nav-hidden');
+        } else {
+            nav.classList.remove('nav-hidden');
+        }
+        lastScrollY = window.scrollY;
+    });
+
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburgerMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.like, .love').forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('reacted');
         });
     });
 });
-</script>
