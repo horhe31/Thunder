@@ -4,7 +4,6 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    scroll-behavior: smooth;
 }
 
 header {
@@ -17,30 +16,53 @@ header {
 
 nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     background-color: #4b70a5;
     box-shadow: 0 4px 2px -2px gray;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
+    transition: transform 0.3s;
 }
 
-nav a {
+nav.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger-menu span {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 4px;
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links a {
     color: white;
     padding: 14px 20px;
     text-decoration: none;
     text-align: center;
     margin: 0 10px;
-    transition: background-color 0.3s, color 0.3s;
 }
 
-nav a:hover {
+.nav-links a:hover {
     background-color: #5a82c1;
     border-radius: 5px;
 }
 
 .container {
-    padding: 20px;
+    padding: 80px 20px 20px;
     max-width: 1200px;
     margin: 20px auto;
     background-color: white;
@@ -54,16 +76,42 @@ nav a:hover {
     gap: 20px;
 }
 
-.gallery iframe {
+.gallery-grid iframe {
     width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.reactions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.reactions button {
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reactions button:hover {
+    background-color: #4b70a5;
+}
+
+.reactions button.reacted {
+    background-color: #ff4500;
+}
+
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 form label {
@@ -94,7 +142,7 @@ footer {
     background-color: #3b5998;
     color: white;
     text-align: center;
-    padding: 5px 0;
+    padding: 10px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -132,12 +180,22 @@ button#loadMore:hover {
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
     }
 
-    nav {
-        flex-direction: column;
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
     nav a {
